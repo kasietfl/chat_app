@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, parseISO  } from 'date-fns';
 
 const Time = ({ date }) => (
   <Fragment>
-    {formatDistanceToNow(new Date(date), { addSuffix: true })}
+    {formatDistanceToNow(new Date(parseISO(date)), { addSuffix: true })}
   </Fragment>
 );
 

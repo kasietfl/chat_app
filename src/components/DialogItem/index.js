@@ -1,44 +1,40 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import classNames from 'classnames';
+import { format, isToday } from 'date-fns'
 
 import './DialogItem.scss';
 
-import { Time, IconRead } from '../';
+import { IconRead, Avatar } from '../';
 
-const getAvatar = avatar => {
-    if(avatar) {
-        return (
-            <img 
-                src="https://consequenceofsound.net/wp-content/uploads/2019/05/pikachu-e1557247424342.jpg?quality=80" 
-                alt="k"
-            />
-        )
+const getMessageTime = created_at => {
+    if(isToday(created_at)) {
+        return created_at;
     } else {
-        //fkj
+          return format(new Date(created_at), 'dd.MM.yyyy');
+        
     }
-}
+};
 
-const DialogItem = ({ user, message, unread }) => (
-    <div className={classNames("dialog__item", {"dialog__item--online": user.isOnline})}>
+const DialogItem = ({ user, unread, created_at, text, isMe }) => (
+    <div className={classNames(
+        "dialog__item", 
+        {"dialog__item--online": user.isOnline})}
+    >
         <div className="dialog__item-avatar">
-            {/*<img src={user.avatar} alt={`${user.fullname} avatar`}/>*/}
-            {getAvatar(
-                "https://consequenceofsound.net/wp-content/uploads/2019/05/pikachu-e1557247424342.jpg?quality=80"
-            )}
+            <Avatar user={user} />
         </div>
         <div className="dialog__item-info">
             <div className="dialog__item-info-top">
-                <b>Nurel</b>
+                <b>{user.fullname}</b>
                 <span>
-                    {/*<Time date = { new Date()}/>*/}
-                    19:45
+                    {getMessageTime(created_at)}
                 </span>
             </div>
             <div className="dialog__item-info-bottom">
-                <p>Don't tell everyone your plans, instead show them your results.</p>
-                <IconRead isMe={true} isRead={true} />
+                <p>{text}</p>
+                {isMe && <IconRead isMe={true} isRead={true} />}
                 {unread>0 && (<div className="dialog__item-info-bottom-count">
-                    {unread}
+                    {unread > 9 ? "+9" : unread}
                 </div>)}
             </div>
         </div>

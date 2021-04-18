@@ -16,8 +16,12 @@ const Message = ({
     isRead, 
     isTyping}) => {
     return (
-        <div className={classNames('message', 
-            {'message--isme': isMe, 'message--is-typing': isTyping})}>
+        <div 
+            className={classNames('message', {
+                'message--isme': isMe, 
+                'message--is-typing': isTyping
+            })}
+        >
             <div className="message__content">
                 <IconRead isMe={isMe} isRead={isRead} />
                 <div className="message__avatar">
@@ -33,17 +37,17 @@ const Message = ({
                             <span></span>
                         </div>)}
                     </div>)}
-                    <div className="message__attachment">
-                        { attachment &&
-                        attachment.map(item => (
+                    { attachment && attachment.map(item => (
+                        <div className="message__attachment">
                             <div className="message__attachment-item">
                                 <img src={item.url} alt={item.filename} />
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
+                    {date && (
                     <span className="message__date">
                         <Time date={date} />
-                    </span>
+                    </span>)}
                 </div>
             </div>
         </div>
@@ -55,10 +59,6 @@ Message.defaultProps = {
 };
 
 Message.propTypes = {
-    avatar: propTypes.string,
-    text: propTypes.string,
-    date: propTypes.string,
-    user: propTypes.object,
     attachment: propTypes.array,
     isMe: propTypes.bool,
     isRead: propTypes.bool,

@@ -1,5 +1,10 @@
 @import '~reset-css';
 @import '~antd/dist/antd.css';
+@import './layouts/chat';
+
+body {
+    background-color: #f4f7fd;
+}
 
 body, 
 html, 
@@ -12,3 +17,18 @@ html,
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
+* {
+    outline: none;
+}
+.anticon {
+    color: #202020 !important;
+    opacity: 0.4;
+  
+    &:hover {
+      opacity: 1;
+    }
+  
+    &:after {
+      display: none;
+    }
+  }
